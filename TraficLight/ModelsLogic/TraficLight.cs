@@ -8,16 +8,19 @@ namespace TraficLight.ModelsLogic
         public override string LightImage => lightImage.GetLightImage(currentState);
 
         public override string SwitchChangeLightText => isAutoChange ? Strings.StopAutiChangeLightText : Strings.StartAutiChangeLightText;
+        public override string SecondsSwitch { get => (timer.Interval / 1000).ToString(); set => timer.Interval = int.Parse(value) * 1000; }
         public TraficLight()
         {
             timer.Elapsed += OnTimerElapsed;
         }
-
+        public override void ChangeSeconds()
+        {
+            timer.Interval = (int.Parse(SecondsSwitch) * 1000);
+        }
         private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
         {
             ChangeLight();
         }
-
         public override void ChangeLight()
         {
             if (currentState == TraficLightState.Red)
@@ -54,7 +57,6 @@ namespace TraficLight.ModelsLogic
                         LightChanged?.Invoke(this, new LightChengedEventArgs(tl));
             }
         }
-
         public override void SwitchAutoChange()
         {
             isAutoChange = !isAutoChange;

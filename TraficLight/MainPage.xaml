@@ -6,26 +6,39 @@
     xmlns:m="clr-namespace:TraficLight.Models"
     xmlns:vm="clr-namespace:TraficLight.ViewModels"
     x:DataType="vm:MainPageVM">
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*" RowSpacing="5">
-        <Frame>
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,*" RowSpacing="5">
+        <Frame Grid.ColumnSpan="2">
             <BoxView BackgroundColor="{Binding RedColor}" />
         </Frame>
-        <Frame Grid.Row="1">
+        <Frame Grid.Row="1" Grid.ColumnSpan="2">
             <BoxView BackgroundColor="{Binding YellowColor}" />
         </Frame>
-        <Frame Grid.Row="2">
+        <Frame Grid.Row="2" Grid.ColumnSpan="2">
             <BoxView BackgroundColor="{Binding GreenColor}" />
         </Frame>
         <Button
             Grid.Row="3"
+            Grid.ColumnSpan="2"
             Command="{Binding ChangeLightCommand}"
             Text="{x:Static m:Strings.ChangeLightText}" />
+        <Entry 
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="{Binding SecondsSwitch}" 
+            Keyboard="Numeric" 
+            HorizontalTextAlignment="Center"/>
         <Button
             Grid.Row="4"
+            Grid.Column="1"
+            Command="{Binding ChangeSecondsCommand}"
+            Text="Submit" />
+        <Button
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
             Command="{Binding SwitchAutoChangeCommand}"
             Text="{Binding SwitchChangeLightText}" />
         <Image
-            Grid.Row="5"
+            Grid.Row="6"
             HorizontalOptions="Center"
             Source="{Binding LightImage}"
             VerticalOptions="Center" />
