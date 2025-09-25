@@ -8,14 +8,14 @@ namespace TraficLight.ModelsLogic
         public override string LightImage => lightImage.GetLightImage(currentState);
 
         public override string SwitchChangeLightText => isAutoChange ? Strings.StopAutiChangeLightText : Strings.StartAutiChangeLightText;
-        public override string SecondsSwitch { get => (timer.Interval / 1000).ToString(); set => timer.Interval = int.Parse(value) * 1000; }
+        public override double SecondsSwitch { get => timer.Interval / SecondsToMiliseconds; set => timer.Interval = value * SecondsToMiliseconds; }
         public TraficLight()
         {
             timer.Elapsed += OnTimerElapsed;
         }
         public override void ChangeSeconds()
         {
-            timer.Interval = (int.Parse(SecondsSwitch) * 1000);
+            timer.Interval = SecondsSwitch * SecondsToMiliseconds;
         }
         private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
         {

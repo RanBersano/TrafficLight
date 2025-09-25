@@ -17,7 +17,9 @@ namespace TraficLight.Models
             Yellow,
             Green
         }
-        protected System.Timers.Timer timer = new (1000);
+        protected const double SecondsToMiliseconds = 1000;
+        private const double StartInterval = 1; //Seconds
+        protected System.Timers.Timer timer = new (StartInterval * SecondsToMiliseconds);
         protected bool isAutoChange = false;
         protected TraficLightState currentState = TraficLightState.Red;
         protected Light[] lights = [new Light(Colors.Red,true), new Light(Colors.Yellow, false), new Light(Colors.Green, false)];
@@ -30,7 +32,7 @@ namespace TraficLight.Models
         public abstract void ChangeLight();
         public abstract void SwitchAutoChange();
         protected LightImage lightImage = new ();
-        public abstract string SecondsSwitch { get; set; }
+        public abstract double SecondsSwitch { get; set; }
         public abstract void ChangeSeconds();
     }
 }

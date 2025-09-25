@@ -8,8 +8,8 @@ namespace TraficLight.ViewModels
         private ModelsLogic.TraficLight tl = new ();
         public ICommand ChangeLightCommand { get => new Command(ChangeLight); }
         public ICommand SwitchAutoChangeCommand { get => new Command(SwitchAutoChange); }
-        public ICommand ChangeSecondsCommand { get => new Command(ChangeSeconds); }
-        public string SecondsSwitch { get => tl.SecondsSwitch; set => tl.SecondsSwitch = value; }
+        public ICommand ChangeSecondsCommand => new Command(ChangeSeconds);
+        public double SecondsSwitch { get => tl.SecondsSwitch; set => tl.SecondsSwitch = value; }
         private void ChangeSeconds()
         {
             tl.ChangeSeconds();
